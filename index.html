@@ -20,6 +20,8 @@
         .service-card {
             transition: transform 0.5s ease, box-shadow 0.5s ease;
             height: auto;
+            
+            padding: 1.5rem;
         }
 
         .service-card:hover {
@@ -40,19 +42,8 @@
 
         @media (max-width: 640px) {
             .swiper-slide {
-                width: 100%;
-            }
-
-            .swiper-container {
-                padding: 20px;
-            }
-
-            .service-card h3 {
-                font-size: 1.125rem;
-            }
-
-            .service-card p {
-                font-size: 0.875rem;
+                width: 100%; 
+                flex: 0 0 30%; 
             }
         }
     </style>
@@ -64,7 +55,7 @@
             Our Services
         </div>
 
-        <div class="swiper-container max-w-6xl mx-auto mt-14">
+        <div class="swiper-container max-w-6xl mx-auto mt-14 px-4">
             <div class="swiper-wrapper"></div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
@@ -128,11 +119,11 @@
 
         services.forEach(service => {
             const card = document.createElement('div');
-            card.className = 'swiper-slide service-card bg-white p-6 text-center shadow-lg max-w-xs mx-auto';
+            card.className = 'swiper-slide service-card bg-white text-center shadow-lg rounded-lg';
 
             card.innerHTML = `
                 <div class="icon-wrapper relative -mt-14 mb-6 flex justify-center">
-                    <div class="icon bg-white border-4 border-purple-800 p-4 rounded-full flex items-center justify-center">
+                    <div class="icon bg-white border-4" style="border-color: #2A1768 !important; padding: 1rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                         <img src="${service.image}" alt="Icon representing ${service.title}" class="w-16 h-16">
                     </div>
                 </div>
@@ -145,40 +136,43 @@
         });
 
         const swiper = new Swiper('.swiper-container', {
-            slidesPerView: 1,
+    slidesPerView: 'auto',
+    spaceBetween: 20, // Adjust space as needed
+    loop: true,
+    autoplay: {
+        delay: 7000,
+        disableOnInteraction: false,
+    },
+    speed: 1500,
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    mousewheel: {
+        invert: false,
+        forceToAxis: true,
+        releaseOnEdges: true,
+    },
+    grabCursor: true,
+    breakpoints: {
+        640: {
+            slidesPerView: 'auto',
+            spaceBetween: 10,
+        },
+        768: {
+            slidesPerView: 'auto',
             spaceBetween: 20,
-            loop: true,
-            autoplay: {
-                delay: 3000,
-                disableOnInteraction: false,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            mousewheel: {
-                invert: false,
-            },
-            grabCursor: true,
-            breakpoints: {
-                640: {
-                    slidesPerView: 1,
-                    spaceBetween: 10,
-                },
-                768: {
-                    slidesPerView: 2,
-                    spaceBetween: 20,
-                },
-                1024: {
-                    slidesPerView: 3,
-                    spaceBetween: 30,
-                },
-                1280: {
-                    slidesPerView: 4,
-                    spaceBetween: 30,
-                },
-            },
-        });
+        },
+        1024: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+        },
+        1280: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+        },
+    },
+});
     </script>
 </body>
 
